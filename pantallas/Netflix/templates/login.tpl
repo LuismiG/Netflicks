@@ -2,27 +2,20 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <title>Index</title>
-    <style>
+    <title></title>
+    <meta charset="utf-8" />
+    <style type="text/css">
         body {
             font-family: verdana;
-            background-color: darkslategrey;
         }
 
         header {
             padding: 20px;
-            font-size: 1em;
+            font-size: 2em;
             font-weight: bold;
-            background-color: black;
+            background-color: slateblue;
             color: white;
             margin-bottom: 15px;
-            display: flex;
-            justify-content: space-between;
-        }
-        
-        h1{
-            color: white;
         }
 
         article {
@@ -59,11 +52,7 @@
             color: white;
             border: 1px solid black;
             padding: 5px;
-            background-color: red;
-            border-radius: 43px 43px 43px 43px;
-            -moz-border-radius: 43px 43px 43px 43px;
-            -webkit-border-radius: 43px 43px 43px 43px;
-            border: 2px solid white;
+            background-color: black;
         }
 
         .enlace {
@@ -92,35 +81,31 @@
             color: white;
             font-weight: bold;
         }
-        
-        main {
-            display: inline-flex;
-        }
-        
-        div#cerrar {
-            padding-top: 15px;
-        }
-        
 
     </style>
+
 </head>
+
 <body>
     <header>
-        <div>
-            <img src="imgNetflix/Netflicks.png" alt="logo" height="50">
-        </div>
-        <div id="cerrar">
-            <a href='cerrar.php' class='enlaceboton'>Cerrar Sesión</a>
-        </div>
+        Streaming | Login
     </header>
-    {foreach from=$videos item=video}
-    <main>
+    <section>
         <article>
-            <h1>{$video->titulo}</h1>
-            <img src="../../../carteles/{$video->cartel}" alt="Cartel" height="300" width="225"><br /> 
+            Identificación:
+               
+                <form action='validar.php' method='post'>
+            <table>
+              <tr>
+                  <br>
+                  <td>DNI:</td>
+                    <td><input type='text' name='dni' size='20' maxlength='9' placeholder='Dni' required='required' /></td></tr>
+                    <tr><td>Contraseña: </td>
+                 <td><input type='password' name='clave' size='20' maxlength='20' placeholder='Contraseña' required='required' /></td></tr>
+                <tr><td><input type='submit' value='Validar' /></tr>
+                </table></form>
         </article>
-    </main>
-    <!--<p>{$video->sinopsis}</p><br />-->
-    {/foreach}
+    </section>
 </body>
+
 </html>
