@@ -21,7 +21,7 @@ $videos=$bd->getVideos();
 
 $pantalla=new Pantalla("../../pantallas/Netflix");
 
-$parametros=array('avideos' => $videos,'numero'=>$carrito->numeroProductos(),'mensaje'=>$mensaje);
+$parametros=array('videos' => $videos,'mensaje'=>$mensaje);
 
 $pantalla->mostrar("index.tpl",$parametros);
 

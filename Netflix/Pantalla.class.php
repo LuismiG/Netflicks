@@ -13,7 +13,7 @@ class Pantalla extends Smarty{
 	}
 	
 	
-	public  function mostrar($nombrePantalla, $parametros){
+	public function mostrar($nombrePantalla, $parametros){
 	
 			
 		foreach($parametros as $variable => $valor){
