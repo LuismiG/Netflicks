@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Index</title>
+    <title>Index Orden</title>
     <style>
         body {
             font-family: verdana;
@@ -113,8 +113,8 @@
             <a href='cerrar.php' class='enlaceboton'>Cerrar Sesión</a>
         </div>
     </header>
-    <a href='ordenarA.php' class='enlace'>Ordenar alfabéticamente</a>
-    {foreach from=$videos item=video}
+    <a href='index.php' class='enlace'>Sin Ordenar</a>
+    {foreach from=$videosOrden item=video}
     <main>
         <article>
             <h1>{$video->titulo}</h1>
