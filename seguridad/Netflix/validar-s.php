@@ -26,14 +26,39 @@ $consulta=$canal->prepare("select dni,nombre,clave from usuarios where dni=?");
 $consulta->bind_param("s",$ddni);
 $ddni=$dni;
 $consulta->execute();
-$consulta->bind_result($dniBD,$nombreDB,$claveDB);
+$consulta->bind_result($dniBD,$nombreBD,$claveBD);
 $consulta->fetch();
+$consulta->close();
 ////////////    
     if (!password_verify($clave, $claveBD)) {
+        
          echo "<script type='text/javascript'> alert('Datos incorrectos.'); window.location.href='login.php'; </script>";
        
 	    exit;
+    } else {
+        
+        $consulta2=$canal->prepare("select codigo_perfil from perfil_usuario where dni=?");
+        $consulta2->bind_param("s",$dddni);
+        $dddni=$dni;
+        $consulta2->execute();
+        $consulta2->bind_result($cod_perfil);
+        $consulta2->store_result();
+        
+        $cods_perfil = [];
+        while ($consulta2->fetch()) {
+                array_push($cods_perfil, $cod_perfil);
+            }
+        
+        require_once("../../www/Netflix/Usuario.class.php");
+        $usuario = new Usuario($dni, $nombre, $cods_perfil);
+        $_SESSION['usuario'] = $usuario;
+        
     }
+
+//prueba
+
+/////
+
 
 
 //Se inicia sesión
@@ -46,8 +71,9 @@ $_SESSION['validado']=true;
 $_SESSION['dni']=$dni;
 
 
+
 $consulta->close();
-$consulta->unset();
+
 $canal->close();
  
 ?>
