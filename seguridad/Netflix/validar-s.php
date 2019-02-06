@@ -49,10 +49,20 @@ $consulta->close();
                 array_push($cods_perfil, $cod_perfil);
             }
         
-        require_once("../../www/Netflix/Usuario.class.php");
-        $usuario = new Usuario($dni, $nombre, $cods_perfil);
-        $_SESSION['usuario'] = $usuario;
+        //Se inicia sesión
+        session_cache_limiter('nocache');
+        session_start();
+
+        //Datos básicos del usuario (secretos)
+        $_SESSION['validado']=true;
+        $_SESSION['dni']=$dni;
+        $_SESSION['nombre']=$nombreBD;
         
+        require_once("../../www/Netflix/Usuario.class.php");
+        //$usuario = new Usuario($dni, $nombreBD, $cods_perfil);
+        $_SESSION['cods_perfil'] = serialize($cods_perfil);
+        echo var_dump($_SESSION);
+        //exit;
     }
 
 //prueba
@@ -61,19 +71,11 @@ $consulta->close();
 
 
 
-//Se inicia sesión
-session_name("SESION");
-session_cache_limiter('nocache');
-session_start();
-
-//Datos básicos del usuario (secretos)
-$_SESSION['validado']=true;
-$_SESSION['dni']=$dni;
 
 
 
-$consulta->close();
+
+$consulta2->close();
 
 $canal->close();
- 
 ?>
