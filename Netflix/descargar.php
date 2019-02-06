@@ -1,34 +1,42 @@
 <?php
-define ("CAMINO","../../tmp/");
-require_once("Carrito.class.php");
+require_once("Video.class.php");
+require_once("AccesoVideos.class.php");
+require_once("Pantalla.class.php");
 
-session_cache_limiter('nocache, private');
+session_cache_limiter('nocache');
 session_start();
-if (!isset($_SESSION['variable'])){
-	session_destroy();
-	unset($_SESSION);
-	header("Location: index.php");
-	exit;	
-}	
-$carrito=new Carrito($_SESSION['variable']);
-$fichero=$carrito->numeroDeCompra();
-$fotos=$carrito->listarGalletas();
-/*
------Comprobación en la tabla de ventas 
-*/
+
+echo var_dump($_SESSION);
+if (isset($_SESSION['validado'])){
+	//$_SESSION['validado']=uniqid();
+    echo $_SESSION['validado'];
+}
+
+$codVideo = $_POST['codigo'];
+
+$bd=new AccesoVideos();
+$videoInfo=$bd->getVideo($codVideo);
+
+echo var_dump($videoInfo);
+
+$direccion = $videoInfo->video;
 
 
+$fichero= $codVideo;
+echo $direccion;
 
-$fichero=CAMINO.$fichero;
 
 $zip = new ZipArchive();
  
 $zip->open($fichero,ZIPARCHIVE::CREATE);
-foreach($fotos as $foto){
-	$zip->addFile($foto->alta);
+if(file_exists("../../recursos/videos/$direccion")) {
+    $zip->addFile("../../recursos/videos/$direccion");
+} else {
+    echo "<script type='text/javascript'> alert('Error al procesar la descarga.'); window.location.href='informacion.php'; </script>";
 }
 $zip->close();
-header("Content-disposition: attachment; filename=fotos.zip");
+header("Content-disposition: attachment; filename=video$fichero.zip");
 header("Content-type: application/zip, application/octet-stream");
 readfile($fichero);
 ?>
+
