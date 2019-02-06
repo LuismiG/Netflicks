@@ -3,7 +3,7 @@
         private $dni;
         private $nombre;
         private $validado;
-        private $codigosPerfiles;
+        private $cods_perfil;
         
         public function __construct($dni, $nombre, $cods_perfil) {
             $this->dni = $dni;
@@ -12,12 +12,12 @@
             $this->cods_perfil = $cods_perfil;          
         }
         
-        /*public function __get($atributo) {
+        public function __get($atributo) {
             if (isset($this->$atributo)) {
                 return $this->$atributo;
             } else {
                 return null;
             }
-        }*/
+        }
     }
 ?>

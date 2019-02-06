@@ -5,8 +5,11 @@ require_once("Pantalla.class.php");
 
 session_cache_limiter('nocache');
 session_start();
-if (!isset($_SESSION['variable'])){
-	$_SESSION['variable']=uniqid();
+echo " -- ".$_SESSION['validado']." ---------------------";
+if (isset($_SESSION['validado']) && $_SESSION['validado']){
+	echo "Esta validado";
+} else {
+    header("Location:login.php"); exit;
 }
 $mensaje="";
 if (isset($_GET['mensaje'])){

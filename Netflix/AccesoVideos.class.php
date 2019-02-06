@@ -49,11 +49,12 @@ class AccesoVideos {
 			die("Error de conexión con la base de datos ".$canal->connect_error);
 		}
 		$canal->set_charset("utf8");
-		
-        foreach ($cods_perfil as $codigoPerfil) {
+		var_dump($cods_perfil);
+        $codds_perfil = unserialize($cods_perfil);
+        foreach ($codds_perfil as $indice => $codigoPerfil) {
             $consulta=$canal->prepare("select * from videos where codigo_perfil = ?");
             $consulta->bind_param("s", $codd_perfil);
-            $$codd_perfil = $codigoPerfil;
+            $codd_perfil = $codigoPerfil;
             $consulta->execute();
             $consulta->bind_result($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
             $consulta->store_result();
@@ -62,10 +63,15 @@ class AccesoVideos {
                 array_push($videos,new Video($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo));
             }
         }
+    
         $canal->close();
-        $videosOrden = sort($videos);
+        /*usort($videos, "cmp");
         
-		return $videosOrden;
+        function cmp($a, $b) {
+            return strcmp($a->titulo, $b->titulo);
+        }*/
+        
+		return $videos;
 	}
 	
 	
