@@ -114,7 +114,7 @@
         </div>
     </header>
     <a href='index.php' class='enlace'>Sin Ordenar</a>
-    {foreach from=$videosOrden item=video}
+    {foreach from=$videos item=video}
     <main>
         <article>
             <h1>{$video->titulo}</h1>
