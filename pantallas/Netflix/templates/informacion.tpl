@@ -113,21 +113,25 @@
             <a href='cerrar.php' class='enlaceboton'>Cerrar Sesión</a>
         </div>
     </header>
-    <a href='ordenarA.php' class='enlace'>Ordenar alfabéticamente</a>
-    {foreach from=$videos item=video}
-    <main>
-      <form action="informacion.php" method="post">
+    <a href='index.php' class='enlace'>Volver</a>
+    <form action="reproductor.php" method="post">
           <input type="hidden" name="codigo" value="{$video->codigo}" />
-       
-            <article>
-                <h1>{$video->titulo}</h1>
-                <input type="image" src="carteles/{$video->cartel}" alt="Cartel" height="300" width="225" value="Submit" />
-                
-              <!--  <img src="carteles/{$video->cartel}" alt="Cartel" height="300" width="225"><br /> -->
-            </article>
-        </form>
+          <input type="image" src="imgNetflix/boton.png" height="100" width="100" alt="Boton" value="Submit" />
+    </form>
+    {if $descargable eq "S"}
+    <form action="descargar.php" method="post">
+          <input type="hidden" name="codigo" value="{$video->codigo}" />
+          <input type="image" src="imgNetflix/descargar.png" height="70" width="302" alt="btnDescarga" value="Submit" />
+    </form>
+    {/if}
+    <main>
+        <article>
+            <h1>{$video->titulo}</h1>
+            <img src="carteles/{$video->cartel}" alt="Cartel" height="300" width="225"><br />
+            <p>{$video->sinopsis}</p> 
+        </article>
     </main>
     <!--<p>{$video->sinopsis}</p><br />-->
-    {/foreach}
+    
 </body>
 </html>
