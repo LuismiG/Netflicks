@@ -2,7 +2,7 @@
 include "../../seguridad/Netflix/videosBD.class.php";
 include "../../seguridad/Netflix/validar-s.php";
 
-header("Location: formularioSubida.php");
+header("Location: index.php");
 
  
 ?>

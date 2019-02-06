@@ -11,6 +11,10 @@ if (validado($dni)){
 }
 */
 
+if(isset($_GET['mensaje'])){
+	echo "<span style='color:red;'>".$_GET['mensaje']."</span>";
+}
+
 
 $pantalla=new Pantalla("../../pantallas/Netflix");
 $pantalla->mostrar("login.tpl", array());

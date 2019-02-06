@@ -42,6 +42,31 @@ class AccesoVideos {
 		$canal->close();
 		return $videos;
 	}
+    
+    public function getVideosOrden($cods_perfil){
+		$canal=new mysqli(VideosBD::IP, VideosBD::USUARIO, VideosBD::CLAVE, VideosBD::BD);
+		if ($canal->connect_errno){
+			die("Error de conexión con la base de datos ".$canal->connect_error);
+		}
+		$canal->set_charset("utf8");
+		
+        foreach ($cods_perfil as $codigoPerfil) {
+            $consulta=$canal->prepare("select * from videos where codigo_perfil = ?");
+            $consulta->bind_param("s", $codd_perfil);
+            $$codd_perfil = $codigoPerfil;
+            $consulta->execute();
+            $consulta->bind_result($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
+            $consulta->store_result();
+            $videos=array();
+            while ($consulta->fetch()){
+                array_push($videos,new Video($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo));
+            }
+        }
+        $canal->close();
+        $videosOrden = sort($videos);
+        
+		return $videosOrden;
+	}
 	
 	
 }
