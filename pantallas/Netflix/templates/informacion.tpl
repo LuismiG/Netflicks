@@ -128,6 +128,7 @@
         <article>
             <h1>{$video->titulo}</h1>
             <img src="carteles/{$video->cartel}" alt="Cartel" height="300" width="225"><br />
+            <iframe src="reproductor.php?v={$ruta}" frameborder="0"></iframe>
             <p>{$video->sinopsis}</p> 
         </article>
     </main>
