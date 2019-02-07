@@ -35,6 +35,7 @@ echo var_dump($videoInfo);
 
 $descargable = $videoInfo->descargable;
 echo $descargable;
+$ruta = $videoInfo->video;
 
 
 
@@ -42,7 +43,7 @@ echo $descargable;
 
 $pantalla=new Pantalla("../../pantallas/Netflix");
 
-$parametros=array('descargable' => $descargable,'video'=>$videoInfo);
+$parametros=array('descargable' => $descargable,'video'=>$videoInfo, 'ruta'=>$ruta);
 
 $pantalla->mostrar("informacion.tpl",$parametros);
 

@@ -21,6 +21,7 @@ class AccesoVideos {
 			return null;
 		}
 		$consulta->fetch();
+        $consulta->close();
 		$canal->close();
 		return new Video($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
 	}
@@ -39,6 +40,7 @@ class AccesoVideos {
 		while ($consulta->fetch()){
 			array_push($videos,new Video($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo));
 		}
+        $consulta->close();
 		$canal->close();
 		return $videos;
 	}
@@ -57,19 +59,20 @@ class AccesoVideos {
             $codd_perfil = $codigoPerfil;
             $consulta->execute();
             $consulta->bind_result($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
-            $consulta->store_result();
             $videos=array();
             while ($consulta->fetch()){
                 array_push($videos,new Video($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo));
             }
         }
-    
+        $consulta->close();
         $canal->close();
-        /*usort($videos, "cmp");
+        
         
         function cmp($a, $b) {
             return strcmp($a->titulo, $b->titulo);
-        }*/
+        }
+        
+        usort($videos, "cmp");
         
 		return $videos;
 	}
