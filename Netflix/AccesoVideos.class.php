@@ -53,13 +53,13 @@ class AccesoVideos {
 		$canal->set_charset("utf8");
 		var_dump($cods_perfil);
         $codds_perfil = unserialize($cods_perfil);
+        $videos=array();
         foreach ($codds_perfil as $indice => $codigoPerfil) {
             $consulta=$canal->prepare("select * from videos where codigo_perfil = ?");
             $consulta->bind_param("s", $codd_perfil);
             $codd_perfil = $codigoPerfil;
             $consulta->execute();
             $consulta->bind_result($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo);
-            $videos=array();
             while ($consulta->fetch()){
                 array_push($videos,new Video($ccodigo,$ttitulo,$ccartel,$ddescargable,$ccodigo_perfil,$ssinopsis,$vvideo));
             }
